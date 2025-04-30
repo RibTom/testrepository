@@ -1,0 +1,203 @@
+{
+  "blocks": {
+    "languageVersion": 0,
+    "blocks": [
+      {
+        "type": "ecore_pipeline",
+        "id": "z[Ib{|:nKA_X-((s~Y7y",
+        "x": 75,
+        "y": 24,
+        "fields": {
+          "ATTR_NAME": "tutorial_pipeline",
+          "ATTR_CONCURRENT": false
+        },
+        "inputs": {
+          "CONT_WHEN": {
+            "block": {
+              "type": "ecore_when",
+              "id": "DTaRHa_sIjpJ}I/yuaf3",
+              "fields": {
+                "ATTR_NAME": "on_push",
+                "ATTR_TRIGGER": "workflow_dispatch",
+                "ATTR_TIMER": ""
+              }
+            }
+          },
+          "CONT_JOB": {
+            "block": {
+              "type": "ecore_job",
+              "id": "g9%$Xvx-66h,Oh/PL!Ki",
+              "fields": {
+                "ATTR_NAME": "build_test",
+                "ATTR_ALLOWFAILURE": false,
+                "ATTR_DESCRIPTION": "Build and test the application"
+              },
+              "inputs": {
+                "CONT_TOOL": {
+                  "block": {
+                    "type": "ecore_tool",
+                    "id": "fU!MZF|^*4yx9Zdg+SXA",
+                    "fields": {
+                      "ATTR_NAME": "ubuntu-latest"
+                    }
+                  }
+                },
+                "CONT_COMMAND": {
+                  "block": {
+                    "type": "ecore_command",
+                    "id": "XinKc.zHV(l^f{*}M5wp",
+                    "fields": {
+                      "ATTR_NAME": ""
+                    },
+                    "inputs": {
+                      "CONT_TOOL": {
+                        "block": {
+                          "type": "ecore_tool_value",
+                          "id": "d@D+:Y5-k9VZY829Iy`F",
+                          "fields": {
+                            "ATTR_NAME": "actions/checkout@v4"
+                          }
+                        }
+                      }
+                    },
+                    "next": {
+                      "block": {
+                        "type": "ecore_command",
+                        "id": "x~rd@7X]hL(FQntuYO:`",
+                        "fields": {
+                          "ATTR_NAME": "setup node.js"
+                        },
+                        "inputs": {
+                          "CONT_TOOL": {
+                            "block": {
+                              "type": "ecore_tool_value",
+                              "id": "R(v=JXNbA4YBt?wxmnPb",
+                              "fields": {
+                                "ATTR_NAME": "actions/setup-node@v3"
+                              }
+                            }
+                          },
+                          "CONT_PARAMETER": {
+                            "block": {
+                              "type": "ecore_parameter",
+                              "id": "w(*oscU@^g#t^yE5@C5V",
+                              "fields": {
+                                "ATTR_PARAMETER": "node-version: '18'"
+                              }
+                            }
+                          }
+                        },
+                        "next": {
+                          "block": {
+                            "type": "ecore_command",
+                            "id": ";fQd70i:6{r2Rk%NNr_5",
+                            "fields": {
+                              "ATTR_NAME": "dependencies"
+                            },
+                            "inputs": {
+                              "CONT_TOOL": {
+                                "block": {
+                                  "type": "ecore_tool_value",
+                                  "id": ")jOP+M.3m[N79_/zLiO1",
+                                  "fields": {
+                                    "ATTR_NAME": "yarn install"
+                                  }
+                                }
+                              }
+                            },
+                            "next": {
+                              "block": {
+                                "type": "ecore_command",
+                                "id": "$J|:rt^5XyaHZ.:FX{dL",
+                                "fields": {
+                                  "ATTR_NAME": "tests"
+                                },
+                                "inputs": {
+                                  "CONT_TOOL": {
+                                    "block": {
+                                      "type": "ecore_tool_value",
+                                      "id": ";5_tV2?g0,3CZc6nSsTp",
+                                      "fields": {
+                                        "ATTR_NAME": "yarn test"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "next": {
+                "block": {
+                  "type": "ecore_job",
+                  "id": "o.[9h9vL^Y:29E=4M5}x",
+                  "fields": {
+                    "ATTR_NAME": "heroku",
+                    "ATTR_ALLOWFAILURE": false,
+                    "ATTR_DESCRIPTION": "deploy heroku"
+                  },
+                  "inputs": {
+                    "CONT_TOOL": {
+                      "block": {
+                        "type": "ecore_tool",
+                        "id": "d)$A-y#@`}/SAz:h2Y:P",
+                        "fields": {
+                          "ATTR_NAME": "ubuntu-latest"
+                        }
+                      }
+                    },
+                    "CONT_COMMAND": {
+                      "block": {
+                        "type": "ecore_command",
+                        "id": "(-5Zftpp8xf*HuZT!P$G",
+                        "fields": {
+                          "ATTR_NAME": ""
+                        },
+                        "inputs": {
+                          "CONT_TOOL": {
+                            "block": {
+                              "type": "ecore_tool_value",
+                              "id": "IS9/^7BeshtH]u6AX?0U",
+                              "fields": {
+                                "ATTR_NAME": "actions/checkout@v4"
+                              }
+                            }
+                          }
+                        },
+                        "next": {
+                          "block": {
+                            "type": "ecore_command",
+                            "id": "*jH{F0_BMH8u$vwOPN*/",
+                            "fields": {
+                              "ATTR_NAME": "setup heroku"
+                            },
+                            "inputs": {
+                              "CONT_TOOL": {
+                                "block": {
+                                  "type": "ecore_tool_value",
+                                  "id": "VYanXr+W!eLkdFioE9*=",
+                                  "fields": {
+                                    "ATTR_NAME": "akhileshns/heroku-deploy@v3.12.12"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}
