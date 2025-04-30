@@ -1,0 +1,23 @@
+# Generated CI/CD Pipeline YAML
+# This YAML is compatible with GitHub Actions
+
+# Pipeline: tutorial_pipeline
+name: tutorial_pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_test:
+    # Build and test the application
+    runs-on: ubuntu-latest
+    steps:
+            - name: command_40954
+              uses: actions/checkout@v4
+            - name: setup node.js
+              uses: actions/node@v3
+              with:
+                        node-version: '20'
+                        distribution: 'temurin'
+            - name: check node version
+              run: unnamed_tool node --version
